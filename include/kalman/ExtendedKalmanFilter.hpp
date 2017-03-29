@@ -110,7 +110,24 @@ namespace Kalman {
             // Setup state and covariance
             P.setIdentity();
         }
-        
+
+        /**
+         * @brief Initialize state
+         * @param initialState The initial state of the system
+         */
+        void init(const State& initialState)
+        {
+          KalmanBase::init(initialState);
+
+          // If the state is dynamic, we need to initalize the covariance size
+          // as well
+          if(StateType::RowsAtCompileTime == Kalman::Dynamic)
+          {
+            P.resize(x.rows(), x.rows());
+          }
+
+        }
+
         /**
          * @brief Perform filter prediction step using system model and no control input (i.e. \f$ u = 0 \f$)
          *
