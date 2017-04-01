@@ -124,6 +124,7 @@ namespace Kalman {
           if(StateType::RowsAtCompileTime == Kalman::Dynamic)
           {
             P.resize(x.rows(), x.rows());
+            P.setIdentity();
           }
 
         }
